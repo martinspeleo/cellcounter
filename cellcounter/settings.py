@@ -2,6 +2,7 @@ import os
 # Django settings for cellcounter project.
 import uuid
 import dj_database_url
+from datetime import timedelta
 
 DEBUG = DEBUG = bool(os.environ.get('DEBUG', False))
 TEMPLATE_DEBUG = DEBUG
@@ -9,6 +10,9 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+
+AUTO_EMAIL_ADDRESS = "cellcountr@gmail.com"
+PASSWORD_RESET_KEY_DURATION = timedelta(hours = 6)
 
 MANAGERS = ADMINS
 
@@ -37,7 +41,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+# USE_TZ = True #Putting this back in will stop password reseting from working.
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"

@@ -60,8 +60,8 @@ def images_by_cell_type(request, cell_type):
 def similar_images(request, cell_image_pk):
     ci = CellImage.objects.get(pk = cell_image_pk)
     return render_to_response('main/images_by_cell_type.html',
-                {'images': ci.similar_cells(),},
-                context_instance=RequestContext(request))
+                              {'images': ci.similar_cells(),},
+                              context_instance=RequestContext(request))
 
 def thumbnail(request, cell_image_pk):
     ci = CellImage.objects.get(pk = cell_image_pk)

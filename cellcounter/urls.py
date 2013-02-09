@@ -28,7 +28,7 @@ urlpatterns = patterns('',
 
     url(r'^api/cell_types/$', ListCellTypesView.as_view(), name="cell_types"),
 
-    url(r'^login/$', login, {'template_name': 'main/login.html'}, name='login'),
+    url(r'^login/$', login, {'template_name': 'accounts/login.html'}, name='login'),
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
 
     url(r'^accounts/', include('cellcounter.accounts.urls')),

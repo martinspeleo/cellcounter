@@ -29,4 +29,9 @@ def create_user_profile(sender, instance, created, **kwargs):
             # TODO Should this throw a configuration exception
             pass
 
+class PasswordResetKey(models.Model):
+     user = models.ForeignKey(User)
+     key = models.CharField(max_length=30)
+     expiry = models.DateTimeField()
+
 post_save.connect(create_user_profile, sender=User)

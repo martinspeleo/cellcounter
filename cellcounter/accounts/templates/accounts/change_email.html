@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<h2>Change Email</h2>
+
+<form action="" method="post">{% csrf_token %}
+<table>
+{{form}}
+</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}
