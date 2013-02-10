@@ -24,7 +24,7 @@
     </div>
     <div style="float: right;">
             {% if user.is_authenticated %}
-            <li><a href="{% url manage_my_account %}">my Account</a></li>
+            <a href="{% url manage_my_account %}">my Account</a>
             <a href="{% url logout %}">logout</a>
             {% else %}
             <a href="{% url login %}">login</a>
