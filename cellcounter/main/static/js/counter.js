@@ -54,6 +54,7 @@ $(document).ready(function() {
 
     $('#openkeyboard').click(function () {
         $('#fuzz').fadeIn('slow', function () {
+            resize_keyboard($("div#content").width());
             $('#counterbox').slideDown('slow', function () {
                 $("#fuzz").css("height", $(document).height());
                 keyboard_active = true;
@@ -151,7 +152,11 @@ $(document).ready(function() {
     //Adjust height of overlay to fill screen when browser gets resized
     $(window).bind("resize", function (){
         $("#fuzz").css("height", $(document).height());
+        //$("#total").text($("#counterbox").width());
         //$("#fuzz").css("top", $(window).top());
+
+        if(keyboard_active)
+            resize_keyboard($("div#content").width());
     });
     //$("#fuzz").css("height", $(document).height());
 
@@ -259,8 +264,8 @@ $(document).ready(function() {
                                     .dialog({
                                         autoOpen: false,
                                         title: fullname,
-                                        width: 840,
-                                        height: 600
+                                        width: 900,
+                                        height: 700
                                     });
                                 $dialog.dialog('open');
                         }
@@ -340,6 +345,20 @@ $(document).ready(function() {
     });
 });
 
+function resize_keyboard(width) {
+
+    /* Don't do anything as we're using media selectors in the CSS to control the keyboard sizing */
+
+    /*if(width < 1024) {
+        $("#keysbox").removeClass("largekeyboard");
+        $("#keysbox").addClass("smallkeyboard");
+    }
+    else {
+        $("#keysbox").removeClass("smallkeyboard");
+        $("#keysbox").addClass("largekeyboard");
+    }*/
+}
+
 function reset_counters() {
     for(var x in cell_types) {
         cell_types[x].count = 0;
@@ -369,7 +388,7 @@ function load_keyboard() {
 }
 
 function update_keyboard() {
-        var keyboard_keys = $("#terbox").find("div.box1");
+        var keyboard_keys = $("#keysbox").find("div.box1");
 
         for(var x in cell_types) {
             cell_types[x].box = [];
@@ -404,7 +423,7 @@ function update_keyboard() {
 
 function edit_keyboard() {
     "use strict";
-    //var keyboard_keys = $("#terbox").find("div.box1");
+    //var keyboard_keys = $("#keysbox").find("div.box1");
 
     if(editing_keyboard) return;
 
