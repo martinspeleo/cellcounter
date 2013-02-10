@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 from cellcounter.accounts.models import UserProfile, PasswordResetKey
-from cellcounter.accounts.forms import UserCreateForm, UserNameReminderForm, RequestPasswordResetForm, SetPasswordForm, PasswordChangeForm, EmailChangeForm
+from cellcounter.accounts.forms import UserCreateForm, UserNameReminderForm, RequestPasswordResetForm, SetPasswordForm, PasswordChangeForm, EmailChangeForm, DeleteAccountForm
 from cellcounter.mixins import JSONResponseMixin
 from django.contrib.auth.models import User
 
@@ -167,5 +167,18 @@ def change_email(request):
     else:
         form = EmailChangeForm(instance = request.user)
     return render_to_response('accounts/change_email.html',
+                              {'form': form,},
+                              context_instance=RequestContext(request)) 
+
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        form = DeleteAccountForm(request.user, request.POST)
+        if form.is_valid():
+            request.user.delete()
+            return HttpResponseRedirect(reverse("account_deleted"))
+    else:
+        form = DeleteAccountForm(request.user)
+    return render_to_response('accounts/delete_account.html',
                               {'form': form,},
                               context_instance=RequestContext(request)) 

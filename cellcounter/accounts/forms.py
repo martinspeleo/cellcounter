@@ -42,3 +42,15 @@ class RequestPasswordResetForm(forms.Form):
             raise forms.ValidationError("Unregistered username.")
         return username
 
+class DeleteAccountForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        return super(DeleteAccountForm, self).__init__(*args, **kwargs)
+
+    def clean_password(self):
+        password = self.cleaned_data["password"]
+        if not self.user.check_password(password):
+            raise forms.ValidationError("Password incorrect")
+        return password

@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import direct_to_template
 
-from cellcounter.accounts.views import KeyboardLayoutView, register, forgotten_username, forgotten_password, password_reset, change_email, change_password
+from cellcounter.accounts.views import KeyboardLayoutView, register, forgotten_username, forgotten_password, password_reset, change_email, change_password, delete_account
 
 urlpatterns = patterns('',
     url(r'^keyboard/$', KeyboardLayoutView.as_view()),
@@ -16,4 +16,6 @@ urlpatterns = patterns('',
     url(r'^change_email/$', change_email, name="change_email"),
     url(r'^email_reset/$', direct_to_template, {'template': 'accounts/email_reset.html'}, name="email_reset"),
     url(r'^change_password/$', change_password, name="change_password"),
+    url(r'^delete_account/$', delete_account, name="delete_account"),
+    url(r'^account_deleted/$', direct_to_template, {'template': 'accounts/account_deleted.html'}, name="account_deleted"),
 )

@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<h2>Delete Account</h2>
+
+Warning this action can not be undone
+<form action="" method="post">{% csrf_token %}
+<table>
+{{form}}
+</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}
